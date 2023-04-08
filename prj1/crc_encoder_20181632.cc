@@ -152,7 +152,7 @@ void handle_binary()
   bitset<8> padding_cnt(padding);
   codeword.insert(0, padding_cnt.to_string());
   cout << codeword << endl;
-  output_file << codeword << endl;
+  output_file << codeword;
 }
 
 char xor_op(char a, char b)
