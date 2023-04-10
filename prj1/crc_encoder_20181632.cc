@@ -150,9 +150,30 @@ void handle_binary()
   }
   // cout << codeword << endl;
   bitset<8> padding_cnt(padding);
+  cout << "padding: " << padding_cnt << endl;
+  // output_file << padding_cnt;
   codeword.insert(0, padding_cnt.to_string());
   cout << codeword << endl;
-  output_file << codeword;
+
+  int index = 0;
+  // cout << codeword.size() / 8 << endl;
+  for (int i = 0; i < codeword.size() / 8; i++)
+  {
+    string tempword;
+    for (int j = index; j < index + 8; j++)
+    {
+      tempword += codeword[j];
+    }
+    cout << tempword << endl;
+    bitset<8> codewords_bit(tempword);
+    char c = strtol(tempword.c_str(), 0, 2);
+    // output_file << codewords_bit;
+    cout << "c:" << c << endl;
+    output_file << c;
+    bitset<8> temp(c);
+    cout << "bits:" << temp << endl;
+    index += 8;
+  }
 }
 
 char xor_op(char a, char b)

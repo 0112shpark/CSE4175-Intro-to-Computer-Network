@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
   // handle error
   if (argc != 6)
   {
-    // 인자의 갯수가 4개가 아닐 때
+    // 인자의 갯수가 5개가 아닐 때
     cout << "usage: ./crc_decoder input_file output_file result_file generator dataword_size\n";
     exit(1);
   }
@@ -87,13 +87,16 @@ int main(int argc, char *argv[])
   {
 
     input_file.get(c);
-
+    // if (c == ' ')
+    // {
+    //   input_file.get(c);
+    // }
     if (input_file.eof())
     {
       break;
     }
     encoded_binary.push_back(c);
-    // cout << c << endl;
+    // cout << int(c) << endl;
   }
   // cout << encoded_binary.size() << endl;
 
@@ -104,15 +107,17 @@ int main(int argc, char *argv[])
   {
 
     temp = bitset<8>(encoded_binary[i]).to_string();
-    val = strtol(temp.c_str(), 0, 2);
-    encoded_data += val;
+    cout << "temp:" << temp << endl;
+    // val = strtol(temp.c_str(), 0, 2);
+    // cout << "val:" << val << endl;
+    encoded_data += temp;
   }
 
+  cout << encoded_data << endl;
   // get padding count
   int padding_num = strtol(encoded_data.substr(0, 8).c_str(), 0, 2);
-  // cout << padding_num << endl;
+  cout << padding_num << endl;
   encoded_data = encoded_data.substr(8 + padding_num);
-  // cout << encoded_data << endl;
 
   // codeword의 길이
   codeword_size = generator.size() + dataword - 1;
@@ -130,7 +135,7 @@ int main(int argc, char *argv[])
     index += codeword_size;
     divide_to.push_back(divide);
   }
-
+  cout << "cnt: " << divide_to.size() << endl;
   mod_2_div(divide_to);
   int error_cnt = check_error();
   cout << "#of codewords: " << divide_to.size() << endl;
@@ -175,7 +180,7 @@ int check_error()
     {
       cnt++;
     }
-  }
+    }
   return cnt;
 }
 
@@ -220,7 +225,7 @@ void mod_2_div(vector<string> divide_by)
       }
       encoded_data[generator.size() - 1] = divide_by[i][k];
     }
-    // cout << "decoded:" << encoded_data << endl;
+    cout << "decoded:" << encoded_data << endl;
     remain.push_back(encoded_data);
   }
 }
