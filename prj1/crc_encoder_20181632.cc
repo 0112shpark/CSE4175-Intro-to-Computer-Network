@@ -126,10 +126,6 @@ void handle_binary()
     divide_by.push_back(str);
     i = i + dataword;
   }
-  for (int i = 0; i < divide_by.size(); i++)
-  {
-    cout << "splited: " << divide_by[i] << endl;
-  }
 
   mod_2_div(divide_by);
   // datawords에 나머지 붙이기
@@ -150,10 +146,10 @@ void handle_binary()
   }
   // cout << codeword << endl;
   bitset<8> padding_cnt(padding);
-  cout << "padding: " << padding_cnt << endl;
+  // cout << "padding: " << padding_cnt << endl;
   // output_file << padding_cnt;
   codeword.insert(0, padding_cnt.to_string());
-  cout << codeword << endl;
+  // cout << codeword << endl;
 
   int index = 0;
   // cout << codeword.size() / 8 << endl;
@@ -164,14 +160,14 @@ void handle_binary()
     {
       tempword += codeword[j];
     }
-    cout << tempword << endl;
+    // cout << tempword << endl;
     bitset<8> codewords_bit(tempword);
     char c = strtol(tempword.c_str(), 0, 2);
     // output_file << codewords_bit;
-    cout << "c:" << c << endl;
+    // cout << "c:" << c << endl;
     output_file << c;
     bitset<8> temp(c);
-    cout << "bits:" << temp << endl;
+    // cout << "bits:" << temp << endl;
     index += 8;
   }
 }
@@ -217,7 +213,7 @@ void mod_2_div(vector<string> divide_by)
       }
       encoded_data[generator.size() - 1] = divide_by[i][k];
     }
-    cout << "encoded:" << encoded_data << endl;
+    // cout << "encoded:" << encoded_data << endl;
     remain.push_back(encoded_data);
   }
 }

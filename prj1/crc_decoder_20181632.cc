@@ -107,16 +107,16 @@ int main(int argc, char *argv[])
   {
 
     temp = bitset<8>(encoded_binary[i]).to_string();
-    cout << "temp:" << temp << endl;
+    // cout << "temp:" << temp << endl;
     // val = strtol(temp.c_str(), 0, 2);
     // cout << "val:" << val << endl;
     encoded_data += temp;
   }
 
-  cout << encoded_data << endl;
+  // cout << encoded_data << endl;
   // get padding count
   int padding_num = strtol(encoded_data.substr(0, 8).c_str(), 0, 2);
-  cout << padding_num << endl;
+  // cout << padding_num << endl;
   encoded_data = encoded_data.substr(8 + padding_num);
 
   // codeword의 길이
@@ -135,11 +135,11 @@ int main(int argc, char *argv[])
     index += codeword_size;
     divide_to.push_back(divide);
   }
-  cout << "cnt: " << divide_to.size() << endl;
+  // cout << "cnt: " << divide_to.size() << endl;
   mod_2_div(divide_to);
   int error_cnt = check_error();
-  cout << "#of codewords: " << divide_to.size() << endl;
-  cout << "error: " << error_cnt << endl;
+  // cout << "#of codewords: " << divide_to.size() << endl;
+  // cout << "error: " << error_cnt << endl;
   result_file << divide_to.size() << " " << error_cnt;
   // string 으로 변환
   convert_to_string();
@@ -180,7 +180,7 @@ int check_error()
     {
       cnt++;
     }
-    }
+  }
   return cnt;
 }
 
@@ -225,7 +225,7 @@ void mod_2_div(vector<string> divide_by)
       }
       encoded_data[generator.size() - 1] = divide_by[i][k];
     }
-    cout << "decoded:" << encoded_data << endl;
+    // cout << "decoded:" << encoded_data << endl;
     remain.push_back(encoded_data);
   }
 }
