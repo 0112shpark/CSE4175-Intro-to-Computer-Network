@@ -4,6 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <bitset>
+#include <cstring>
+#include <stdlib.h>
 
 using namespace std;
 
