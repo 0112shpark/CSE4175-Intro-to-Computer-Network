@@ -44,8 +44,8 @@ void init_vec_table()
   topo_input.clear();
   topo_input.seekg(0, std::ios::beg);
   getline(topo_input, str);
-  node_cnt = stoi(str);
-
+  node_cnt = atoi(str.c_str());
+  // output << node_cnt << endl;
   for (int i = 0; i < MAX; i++)
   {
     for (int j = 0; j < MAX; j++)
@@ -97,12 +97,14 @@ void init_vec_table()
 // calculate the minimum cost
 void cal_dist()
 {
+  // output << node_cnt;
   int cur_node;
 
   for (int i = 0; i < node_cnt; i++)
   {
     int n_node = 1; // 방문한 노드 갯수
     cur_node = i;
+
     // 새로운 노드연산시 모든 방문기록 초기화
     for (int c = 0; c < node_cnt; c++)
     {
@@ -112,7 +114,7 @@ void cal_dist()
     while (n_node != node_cnt)
     {
       int min_cost = NON;
-      int near_node;
+      int near_node = 0;
 
       // 방문하지 않은 node중 가장 가까운 node찾기
       for (int k = 0; k < node_cnt; k++)
@@ -184,7 +186,7 @@ void handle_message()
   int from, to;
   string str;
 
-  // get message NONormation
+  // get message information
 
   // reset file input stream
   mess_input.clear();
@@ -277,7 +279,6 @@ void handle_change()
 
     vec_table[to][from].is_connected = new_connected;
     vec_table[from][to].is_connected = new_connected;
-    // cout << vec_table[from][to].cost << endl;
 
     if (cost != NON)
     {
@@ -286,7 +287,10 @@ void handle_change()
       vec_table[from][to].next = to;
     }
     saved.push_back(make_pair(make_pair(from, to), cost));
+
+    // output << vec_table[from][to].cost << "fff" << endl;
     cal_dist();
+    // output << "hello" << endl;
     print_vec_table();
     handle_message();
   }
